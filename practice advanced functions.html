@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<title>App</title>
+  </head>
+  <body>
+ <button onclick="
+  document.querySelector('button').innerHTML='Loading..'
+  setTimeout(fun,1000)">Start</button>
+ 
+ <button onclick="
+ ch()
+ " >Add to cart</button>
+
+<button onclick="message++ ">Add</button>
+<button onclick="message-- ">Remove</button>
+ <p></p>
+    <script>0
+    let vint=0,count=0,message=0
+   /*let vb=function () {
+    console.log(2+3)
+    count++
+    if(count>2)
+    clearInterval(vint)
+   } 
+   vint=setInterval(vb,1000)*/ //here i can pass vb as it is cause it takes no parameters
+   /*let ad=function (){
+    console.log(2+3)
+    count++
+    if(count>2)
+    return
+    else{
+    ad()
+    return
+    }
+   }
+
+   function rt(ad){                                                              
+    ad()
+    clearInterval(vint)
+
+   }
+
+  vint= setInterval(rt(ad),1000)  //passing the variable as a parameter 
+*/ 
+
+function fun()
+{
+  document.querySelector('button').innerHTML='Finished!'
+}
+  
+function ch()
+{
+ count++
+ document.querySelector('p').innerHTML='Added'
+ vint=setTimeout(function(){document.querySelector('p').innerHTML=''; if(count%2==0) clearTimeout(vint)},2000)
+}
+
+function auto(){
+  if(document.title=='App')
+  document.title='(2) New Messages'
+  else 
+  document.title='App'
+}
+
+//setInterval(auto,1000)
+
+function c()
+{
+  if(document.title=='App')
+  {
+  if(message==0)
+  return
+  else  
+  document.title=`(${message}) New Messages`
+  }
+  else 
+  document.title='App'
+}
+
+setInterval(c,1000)
+    </script>
+  </body>
+</html>

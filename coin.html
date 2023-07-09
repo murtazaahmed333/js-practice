@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculator</title>
+<style>
+  
+</style>
+</head>
+<body>
+<button onclick="f('head')">Head</button>
+<button onclick="f('tail')">Tail</button>
+
+<p></p></br>
+<button onclick="score.wins=0
+score.losses=0
+localStorage.setItem('score',JSON.stringify(score))
+document.querySelector('p').innerHTML=`Wins: ${score.wins}, Losses: ${score.losses}`">Clear</button></br></br></br>
+<input onkeydown="if((event.key)=='Enter') sub()">
+<button onclick="sub()">Submit</button></br>
+<p2></p2>
+
+
+<script>
+let rand=0
+let cp='',up=''
+score=JSON.parse(localStorage.getItem('score'))||{wins:0,losses:0}
+
+
+function f(up)
+{
+rand=Math.random()
+if(rand<0.5)
+cp='head'
+else if(rand>=0.5)
+cp='tail'
+
+if(up==cp)
+{
+  score.wins+=1
+
+  document.querySelector('p').innerHTML=`You win</br>Wins: ${score.wins}</br>Losses: ${score.losses}`
+}
+else{
+  score.losses+=1
+  document.querySelector('p').innerHTML=`You lose</br>Wins: ${score.wins}</br>Losses: ${score.losses}`
+}
+localStorage.setItem('score',JSON.stringify(score))
+}
+
+function sub()
+{
+ document.querySelector('p2').innerHTML=document.querySelector('input').value
+}
+</script>
+</body>
+
+</html>

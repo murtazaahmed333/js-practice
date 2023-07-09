@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Variables</title>
+</head>
+<body>
+<button onclick="quant()">Show quantity</button>
+<button onclick="if(quantity<10){
+quantity+=1
+quant()
+}
+else
+document.querySelector('p').innerHTML='Cart is full'
+">Add to cart</button>
+<button onclick="
+if(quantity<9){
+quantity+=2
+quant()
+}
+else
+document.querySelector('p').innerHTML='Cart is full'
+ ">+2</button>
+
+<button onclick="
+if(quantity<=7)
+ {quantity+=3
+  quant()
+}
+else
+document.querySelector('p').innerHTML='Cart is full'
+">+3</button>
+
+<button onclick="quantity=0; quant()">Reset</button>
+<button onclick="
+if(quantity>0){
+quantity--
+ quant()}
+ else
+ document.querySelector('p').innerHTML='Cart is empty'
+ ">Remove</button><br>
+ <p></p>
+<script>
+quantity=0
+document.querySelector('p').innerHTML=`Cart quantity: ${quantity}`
+function quant()
+{
+  
+  document.querySelector('p').innerHTML=`Cart quantity: ${quantity}`
+}
+
+
+
+</script>
+
+</body>
+
+</html>

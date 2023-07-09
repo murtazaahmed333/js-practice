@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rock paper scissors</title>
+
+<style>
+
+body{
+  background-color: black;
+  color: white;
+}
+.h{
+  font-weight: bold;
+  font-size: 40px;
+  color: white;
+}
+.icons{
+  height: 50px;
+  
+  
+}
+.move{
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  border: 2px solid white;
+  background-color: transparent;
+  border-radius: 60px;
+  margin-left: 10px;
+}
+p2{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.reset{
+  padding: 8px 15px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.c1{
+  border: none;
+  background-color: white;
+  color: black;
+  padding: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+<p class="h">Rock Paper Scissors</p>
+  <button class='move' onclick=" pguess='rock'; sel(pguess)"><img src="rock-emoji.png" class="icons"></button>
+  <button class='move' onclick=" pguess='paper'; sel(pguess) "><img src="paper-emoji.png" class="icons"></button>
+  <button class='move' onclick=" pguess='scissors'; sel(pguess) "><img src="scissors-emoji.png" class="icons"></button></br>
+
+  </br>
+  <p2></p2></br></br>
+  <button class="reset">Reset score</button>
+
+
+
+  <button class="reset auto">Autoplay</button></br>
+  <p3 class="xd"></p3>
+
+<script>
+  let rand=0,count=0,intervalid=0
+  let cguess=''
+  let pguess=''
+  let score = JSON.parse(localStorage.getItem('score'))||{wins:0,losses:0,ties:0}
+
+  document.querySelector('p2').innerHTML=`Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`
+function sel(pguess)
+{
+
+rand=Math.random()
+if(rand<1/3)
+cguess='rock'
+else if(rand>=1/3 && rand<=2/3)
+cguess='paper'
+else if(rand>2/3)
+cguess='scissors'
+
+if(pguess=='rock'){
+ if(cguess=='rock'){ 
+ score.ties+=1
+document.querySelector('p2').innerHTML=`Match tied </br> Wins: ${score.wins} Losses: ${score.losses} Ties: ${score.ties}`
+ 
+ }
+ else if(cguess=='scissors'){
+ score.wins+=1 
+ document.querySelector('p2').innerHTML=`You win</br></br> You <img src="rock-emoji.png" class="icons"> <img src="scissors-emoji.png" class="icons"> Computer </br></br> Wins: ${score.wins} Losses: ${score.losses} Ties: ${score.ties}`
+
+}
+ else if(cguess=='paper'){
+ score.losses+=1
+ document.querySelector('p2').innerHTML=`You lose</br></br> You <img src="rock-emoji.png" class="icons">  <img src="paper-emoji.png" class="icons"> Computer</br></br> Wins: ${score.wins} Losses: ${score.losses} Ties: ${score.ties}`
+ 
+}
+}
+else if(pguess=='paper')
+{
+  if(cguess=='paper'){
+  score.ties+=1  
+  document.querySelector('p2').innerHTML=`Match tied </br> Wins: ${score.wins} Losses: ${score.losses} Ties: ${score.ties}`
+  }
+  else if(cguess=='rock'){
+  score.wins+=1
+  document.querySelector('p2').innerHTML=`You win</br></br> You <img src="paper-emoji.png" class="icons">  <img src="rock-emoji.png" class="icons"> Computer </br></br> Wins: ${score.wins} Losses: ${score.losses} Ties: ${score.ties}`
+  }
+  else if(cguess=='scissors'){
+  score.losses+=1
+  document.querySelector('p2').innerHTML=`You lose</br></br> You <img src="paper-emoji.png" class="icons">  <img src="scissors-emoji.png" class="icons"> Computer </br></br> Wins: ${score.wins} Losses: ${score.losses} Ties: ${score.ties}`
+}
+}
+else if(pguess=='scissors')
+{
+  if(cguess=='scissors'){
+  score.ties+=1
+  document.querySelector('p2').innerHTML=`Match tied </br> Wins: ${score.wins} Losses: ${score.losses} Ties: ${score.ties}`
+  }
+  else if(cguess=='rock'){
+  score.losses+=1
+  document.querySelector('p2').innerHTML=`You lose</br></br> You  <img src="scissors-emoji.png" class="icons">  <img src="rock-emoji.png" class="icons"> Computer </br></br> Wins: ${score.wins} Losses: ${score.losses} Ties: ${score.ties}`
+  }
+  else if(cguess=='paper'){
+  score.wins+=1
+  document.querySelector('p2').innerHTML=`You win</br></br> You <img src="scissors-emoji.png" class="icons"> <img src="paper-emoji.png" class="icons"> Computer </br></br> Wins: ${score.wins} Losses: ${score.losses} Ties: ${score.ties}`
+  }
+}
+
+
+localStorage.setItem('score',JSON.stringify(score))
+}
+
+function auto(){
+
+  if(count%2==1){
+  let strings = ['rock','paper','scissors'];
+  const randomIndex = Math.floor(Math.random() * strings.length);
+  const randomValue = strings[randomIndex];
+  pguess=randomValue
+  sel(pguess)
+  }
+  else
+  return
+}
+
+document.querySelector('.auto').addEventListener('click',()=>{count++,num=1000
+  if(count%2==1)
+  {
+  intervalid=setInterval(auto,num)
+  document.querySelector('.auto').innerHTML='Stop Autoplay'
+  }
+  else{
+  clearInterval(intervalid)
+  document.querySelector('.auto').innerHTML='Autoplay'
+  }
+  })
+
+
+  document.body.addEventListener('keydown',(event)=>{
+  if(event.key=='a'){
+  count++,num=1000
+  if(count%2==1)
+  {
+  intervalid=setInterval(auto,num)
+  document.querySelector('.auto').innerHTML='Stop Autoplay'
+  }
+  else{
+  clearInterval(intervalid)
+  document.querySelector('.auto').innerHTML='Autoplay'
+  }
+}
+else if(event.key=='Backspace')
+{
+  document.querySelector('p3').innerHTML='</br></br>Are you sure you want to reset score? <button onclick="rset();" class="c1">Yes</button><button onclick=cl() class="c1">No</button>'
+}
+
+  })
+
+    document.querySelector('.reset').addEventListener('click',()=>{
+    document.querySelector('p3').innerHTML='</br></br>Are you sure you want to reset score? <button onclick="rset();" class="c1">Yes</button><button onclick=cl() class="c1">No</button>'
+  })
+  
+  
+  function rset()
+  {
+  score.wins=0
+  score.losses=0
+  score.ties=0
+  document.querySelector('p2').innerHTML=`Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`
+  localStorage.setItem('score',JSON.stringify(score))
+  cl()
+  }
+
+  function cl()
+  {
+    document.querySelector('p3').innerHTML=''
+  }
+</script>
+
+</body>
+
+</html>

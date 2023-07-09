@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<title>Advanced functions</title>
+  </head>
+  <body>
+ 
+   
+    <script>
+    
+     /*let stocks={
+      fruits:['mango','banana','strawberry'],
+      holder:['cup','cone'],
+      topping:['chocolate','sprinkles']
+     }
+
+
+     let is_open=true
+
+
+   /*  let order=(time,work)=>{
+
+    return new Promise((resolve,reject)=>{
+    
+    if(is_open){
+    
+    setTimeout(()=>{
+      resolve(work())
+    },time)  
+    
+
+    }
+    else
+    reject(console.log('Shop closed'))
+      
+
+    })
+
+     }
+
+     order(2000,()=>console.log(`${stocks.fruits[0]} was selected`))
+    
+    .then(()=>{
+       
+      return order(1000,()=>{console.log('Production started')})
+
+    })
+
+    .then(()=>{
+
+      return order(1000,()=>{`${stocks.fruits[0]} is being cut`})
+    })
+    let order=(fn,prod)=>{
+      setTimeout(()=>{
+
+        console.log(stocks.fruits[fn])
+        prod(fn)
+      },1000)
+      
+     }
+
+     let production=(fn)=>{
+     setTimeout(()=>{console.log('production started')
+     cut(fn)
+    },2000)
+     }
+
+     let cut=(fn)=>{
+
+      setTimeout(()=>{console.log(`${stocks.fruits[fn]} is being cut`)},1000)
+      
+     }
+     order(1,production)*/
+
+    // let name='Ahmed'
+    // console.log(name.charAt(Math.floor(Math.random()*5)+1))
+
+//     let arr=[1,2,3]
+ //    arr.splice(0,1,4)  //start from 0 index remove 1 value replace it with 4 
+  //   arr.splice(1,0,32) //start from 1 index remove no value and add 32 at position 1 
+    
+  let pending=0
+  let fulfilled=1
+  let rejected=2
+
+  //promise returns an object which contains the state of the promise
+  //returns the promise of the value which is needed 
+
+  //ok fam the promise object doesn't itself do anything the function passed to it is responsible for doing the work we want to be done which may take time to complete 
+
+  //this custom promise takes a function which is the executor of the work 
+  function custompromise(executor)
+  {
+    let state=pending       //promise object takes a function which will do the work taking n time
+    let value=null
+    let handlers=[]
+    let catches=[]
+
+//this function will get called by the executor
+    function resolve(result)
+    {
+      if (state!==pending)
+      return
+      
+      state=fulfilled
+      value=result
+
+      handlers.forEach((h)=>h(value))
+
+    }
+
+    function reject(err)
+    {
+      if(state!==pending)
+      return
+
+      state=rejected
+      value=err
+
+      catches.forEach((c)=>c(err))
+    }
+
+
+    this.then=function(callback){
+      if(state===fulfilled)
+      callback(value)
+      else
+      handlers.push(callback)
+
+    }
+
+    executor(resolve,reject)
+  }
+
+  let dowork=(res,rej)=>{
+    setTimeout(()=>{
+      res('Hi')
+    },1000)
+  }
+
+  //The promise will automatically return the resolved value 
+  let text=new custompromise(dowork)
+  
+  text.then((val)=>{
+    console.log(val)
+  })
+    </script>
+  </body>
+</html>

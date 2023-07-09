@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculator</title>
+<style>
+  
+</style>
+</head>
+<body>
+<button onclick="cal+='1';document.querySelector('p').innerHTML=cal">1</button>
+<button onclick="cal+='2';document.querySelector('p').innerHTML=cal ">2</button>
+<button onclick="cal+='3';document.querySelector('p').innerHTML=cal ">3</button>
+<button onclick="cal+='4';document.querySelector('p').innerHTML=cal ">4</button>
+<button onclick="cal+='5';document.querySelector('p').innerHTML=cal ">5</button>
+<button onclick="cal+='6';document.querySelector('p').innerHTML=cal ">6</button>
+<button onclick="cal+='7';document.querySelector('p').innerHTML=cal ">7</button>
+<button onclick="cal+='8';document.querySelector('p').innerHTML=cal ">8</button>
+<button onclick="cal+='9';document.querySelector('p').innerHTML=cal ">9</button>
+<button onclick="cal+='0';document.querySelector('p').innerHTML=cal ">0</button>
+<button onclick="cal+='+';document.querySelector('p').innerHTML=cal ">+</button>
+<button onclick="cal+='-';document.querySelector('p').innerHTML=cal ">-</button>
+<button onclick="cal+='*';document.querySelector('p').innerHTML=cal ">*</button>
+<button onclick="cal+='/';document.querySelector('p').innerHTML=cal ">/</button>
+<button onclick="cal+='.';document.querySelector('p').innerHTML=cal ">.</button>
+<button onclick="cal='';document.querySelector('p').innerHTML=cal ">Clear</button>
+<button onclick=" cal=eval(cal);document.querySelector('p').innerHTML=cal;localStorage.setItem('result',cal);">=</button></br>
+<p></p>
+<script>
+let cal=localStorage.getItem('result')||''
+document.querySelector('p').innerHTML=cal
+</script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Arrays and Loops
+</title>
+<style>
+  .add{
+    cursor: pointer;
+    background-color: green;
+    padding: 8px 15px;
+    border:none;
+    color:white
+  }
+  .f{
+    padding: 5px 15px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .rm{
+    cursor: pointer;
+    background-color: red;
+    padding: 8px 15px;
+    border:none;
+    color:white
+    
+  }
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.grid,.no2{
+  display: grid;
+  grid-template-columns: 200px 150px 100px;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+</style>
+</head>
+<body>
+<p>Todo list practice</p>  </br>
+
+<div class="no2">
+<input placeholder="Todo name" class="f">
+<input type="date" class="f i2">
+<button onclick="fun()" class="add">Add</button></br>
+</div>
+<div class="todolist grid"></div>
+<script>
+  arr=[{name:'',date:''}]
+ function fun()
+ {
+  
+  arr.push({name:document.querySelector('input').value,date:document.querySelector('.i2').value})
+ 
+  add()
+  
+ } 
+function add()
+{
+  let element=''
+  let html=''
+  let todo=''
+  for(i=0;i<arr.length;i++)
+  {
+    element=arr[i]
+    html=`<div>${element.name}</div> <div>${element.date} </div> <button class="rm" onclick="arr.splice(${i},1);add()">Delete</button>`
+    todo+=html
+  }
+
+  document.querySelector('.todolist').innerHTML=todo
+}
+ 
+function xd()
+{
+  let ar=[1,2,3]
+  let [f1,f2]=ar
+  console.log(f1,f2)
+}
+xd()
+//ar1=[],ar2=[]
+//ar1=ar2 copied by reference to avoid this 
+//ar1=ar2.splice()
+//destructuring e.g i want to copy 1st 2 values of array in variables let [var1,var2]=ar1
+//in while loop continue statement skips the increment or decrement and it has to be done manually to avoid infinite loop
+
+</script>
+</body>
+
+</html>
